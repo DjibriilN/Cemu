@@ -74,7 +74,6 @@ void DiscordPresence::UpdatePresence(State state, const std::string& text) const
     case Playing:
         details_string = "Ingame";
         state_string = "Playing " + text;
-        // Versuche das Game-Icon zu exportieren
         {
             uint64_t titleId = CafeSystem::GetForegroundTitleId();
             std::string iconPath = ExportCurrentGameIconAsPng(titleId);
