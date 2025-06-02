@@ -10,6 +10,9 @@
 #include <wx/wfstream.h>
 #include <wx/imagpng.h>
 #include <filesystem>
+#include "util/helpers/helpers.h"
+#include <wx/mstream.h>
+#include "Cafe/CafeSystem.h"
 
 namespace fs = std::filesystem;
 
@@ -25,7 +28,7 @@ static std::string ExportCurrentGameIconAsPng(uint64_t titleId) {
         tgaData = fsc_extractFile((tempMountPath + "/meta/iconTex.tga.gz").c_str());
         if (tgaData) {
             auto decompressed = zlibDecompress(*tgaData, 70 * 1024);
-            std::swap(tgaData, decompressed);
+            tgaData = std::move(decompressed);
         }
     }
     std::string outPath;
